@@ -1,351 +1,1202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resting in God - Season 7</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        :root {
-            --primary-color: #365233;
-            --accent-color: #d4af37;
-            --bg-soft: #f8faf7;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resting in God — Season 7</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --forest:     #365233;
+      --forest-dk:  #243a22;
+      --forest-lt:  #4a7045;
+      --sage:       #7a9e74;
+      --sage-lt:    #b2cbb0;
+      --cream:      #f5f0e8;
+      --gold:       #c8a96e;
+      --gold-lt:    #e8d5a8;
+      --amber:      #d4874e;
+      --sky:        #7eb4c8;
+      --blush:      #c98070;
+      --text:       #2a2a2a;
+      --text-muted: #6b7a6a;
+    }
 
-        body {
-            background-color: var(--bg-soft);
-            color: #2d3748;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        .theme-bg { background-color: var(--primary-color); }
-        .theme-text { color: var(--primary-color); }
-        .theme-border { border-color: var(--primary-color); }
-        
-        .tab-active {
-            border-bottom: 4px solid var(--primary-color);
-            color: var(--primary-color);
-            font-weight: bold;
-        }
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-        .card {
-            background: white;
-            border-radius: 1rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            transition: transform 0.2s;
-        }
+    /* ─── HEADER ─── */
+    header {
+      background: var(--forest-dk);
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+    }
+    .header-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 80% 50%, rgba(100,160,80,.18) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 10% 20%, rgba(200,169,110,.12) 0%, transparent 60%);
+    }
+    .header-leaves {
+      position: absolute; inset: 0;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cellipse cx='100' cy='100' rx='40' ry='70' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1.5' transform='rotate(30 100 100)'/%3E%3Cellipse cx='100' cy='100' rx='30' ry='60' fill='none' stroke='rgba(255,255,255,0.03)' stroke-width='1' transform='rotate(-20 100 100)'/%3E%3C/svg%3E");
+      background-size: 140px 140px;
+      opacity: .6;
+    }
+    .header-inner {
+      position: relative;
+      padding: 3rem 2rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: .6rem;
+    }
+    .series-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(200,169,110,.18);
+      border: 1px solid rgba(200,169,110,.4);
+      color: var(--gold-lt);
+      font-family: 'Jost', sans-serif;
+      font-size: .7rem;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      padding: .3rem .9rem;
+      border-radius: 2rem;
+      margin-bottom: .4rem;
+    }
+    .series-badge span { font-size: .65rem; opacity: .8; }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.1;
+      letter-spacing: .01em;
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--gold-lt);
+    }
+    .header-sub {
+      font-size: .8rem;
+      font-weight: 400;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--sage-lt);
+      margin-top: .3rem;
+    }
+    .season-dots {
+      display: flex;
+      gap: .35rem;
+      margin-top: 1.2rem;
+    }
+    .season-dots span {
+      width: 22px; height: 4px;
+      border-radius: 2px;
+      background: rgba(255,255,255,.2);
+      transition: background .3s;
+    }
+    .season-dots span.active { background: var(--gold); }
+    .season-dots span.done  { background: var(--sage); }
 
-        .section-header {
-            border-left: 4px solid var(--accent-color);
-            padding-left: 1rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--primary-color);
-        }
+    /* ─── TABS ─── */
+    .tabs-wrapper {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--forest);
+      box-shadow: 0 2px 20px rgba(0,0,0,.2);
+    }
+    .tabs-scroll {
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .tabs-scroll::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      flex: 0 0 auto;
+      padding: .85rem 1.4rem;
+      font-family: 'Jost', sans-serif;
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.55);
+      background: none;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      transition: color .25s;
+      white-space: nowrap;
+    }
+    .tab-btn::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 20%; right: 20%;
+      height: 2.5px;
+      background: var(--gold);
+      border-radius: 2px 2px 0 0;
+      transform: scaleX(0);
+      transition: transform .3s cubic-bezier(.4,0,.2,1);
+    }
+    .tab-btn:hover { color: rgba(255,255,255,.85); }
+    .tab-btn.active { color: #fff; }
+    .tab-btn.active::after { transform: scaleX(1); }
 
-        .reflection-box {
-            background-color: #fdfdfd;
-            border: 1px solid #e2e8f0;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            width: 100%;
-            min-height: 120px;
-            margin-top: 1rem;
-        }
+    /* ─── CONTENT ─── */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; animation: fadeUp .4s ease both; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
-        .btn-send {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 0.5rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: opacity 0.2s;
-        }
+    /* ─── INTRO ─── */
+    .intro-panel {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+    .intro-verse {
+      background: var(--forest);
+      color: #fff;
+      border-radius: 1.2rem;
+      padding: 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 2.5rem;
+    }
+    .intro-verse::before {
+      content: '\201C';
+      position: absolute;
+      top: -1rem; left: 1rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 8rem;
+      color: rgba(255,255,255,.07);
+      line-height: 1;
+    }
+    .intro-verse p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--gold-lt);
+      line-height: 1.6;
+      position: relative;
+    }
+    .intro-verse cite {
+      display: block;
+      font-family: 'Jost', sans-serif;
+      font-style: normal;
+      font-size: .75rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--sage-lt);
+      margin-top: .9rem;
+    }
+    .intro-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 2.5rem;
+    }
+    .intro-card {
+      background: #fff;
+      border-radius: 1rem;
+      padding: 1.6rem;
+      border-top: 3px solid transparent;
+      box-shadow: 0 2px 12px rgba(54,82,51,.08);
+      transition: box-shadow .2s, transform .2s;
+    }
+    .intro-card:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(54,82,51,.13); }
+    .intro-card:nth-child(1) { border-color: var(--forest); }
+    .intro-card:nth-child(2) { border-color: var(--gold); }
+    .intro-card:nth-child(3) { border-color: var(--amber); }
+    .intro-card:nth-child(4) { border-color: var(--sky); }
+    .intro-card .card-icon {
+      width: 40px; height: 40px;
+      border-radius: .6rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+    .intro-card:nth-child(1) .card-icon { background: rgba(54,82,51,.1); }
+    .intro-card:nth-child(2) .card-icon { background: rgba(200,169,110,.15); }
+    .intro-card:nth-child(3) .card-icon { background: rgba(212,135,78,.12); }
+    .intro-card:nth-child(4) .card-icon { background: rgba(126,180,200,.15); }
+    .intro-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--forest-dk);
+      margin-bottom: .5rem;
+    }
+    .intro-card p {
+      font-size: .85rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+    .intro-body h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem;
+      font-weight: 400;
+      color: var(--forest-dk);
+      margin-bottom: 1rem;
+    }
+    .intro-body p {
+      font-size: .95rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+    .intro-practices {
+      background: rgba(54,82,51,.05);
+      border-left: 3px solid var(--forest);
+      border-radius: 0 .8rem .8rem 0;
+      padding: 1.4rem 1.6rem;
+      margin: 1.5rem 0;
+    }
+    .intro-practices p {
+      margin: 0;
+      font-size: .92rem;
+      line-height: 2;
+    }
+    .intro-practices strong { color: var(--forest); }
+    .start-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: var(--forest);
+      color: #fff;
+      border: none;
+      border-radius: .7rem;
+      padding: .9rem 2rem;
+      font-family: 'Jost', sans-serif;
+      font-size: .85rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .2s, transform .2s;
+      margin-top: 1rem;
+    }
+    .start-btn:hover { background: var(--forest-lt); transform: translateY(-2px); }
 
-        .btn-send:hover { opacity: 0.9; }
+    /* ─── DAY PANELS ─── */
+    .day-panel {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem;
+    }
+    .day-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(54,82,51,.12);
+    }
+    .day-number-badge {
+      display: inline-block;
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--forest);
+      background: rgba(54,82,51,.08);
+      padding: .3rem .9rem;
+      border-radius: 2rem;
+      margin-bottom: 1rem;
+    }
+    .day-scripture {
+      background: linear-gradient(135deg, var(--forest-dk) 0%, var(--forest) 100%);
+      border-radius: 1rem;
+      padding: 1.8rem 2rem;
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .day-scripture .ref {
+      font-size: .7rem;
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--sage-lt);
+      margin-bottom: .6rem;
+    }
+    .day-scripture p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+      font-style: italic;
+      color: var(--gold-lt);
+      line-height: 1.65;
+    }
 
-        /* Animation for tab content */
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.4s ease-in-out;
-        }
+    /* three-section layout */
+    .sections-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    @media (min-width: 680px) {
+      .sections-grid { grid-template-columns: 1fr 1.3fr 1fr; }
+    }
+    .section-card {
+      border-radius: 1.1rem;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,.07);
+    }
+    .section-card-head {
+      padding: 1.1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+    }
+    .section-card-head .icon { font-size: 1.2rem; }
+    .section-card-head h3 {
+      font-family: 'Jost', sans-serif;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #fff;
+    }
+    .before-card .section-card-head { background: var(--forest); }
+    .during-card .section-card-head { background: var(--forest-dk); }
+    .after-card  .section-card-head { background: var(--forest-lt); }
+    .section-card-body {
+      background: #fff;
+      padding: 1.4rem 1.5rem;
+    }
+    .section-card-body ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .85rem;
+    }
+    .section-card-body li {
+      display: flex;
+      gap: .7rem;
+      font-size: .88rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
+    .section-card-body li::before {
+      content: '';
+      flex: 0 0 6px;
+      height: 6px;
+      width: 6px;
+      border-radius: 50%;
+      margin-top: .5rem;
+    }
+    .before-card .section-card-body li::before { background: var(--forest); }
+    .during-card .section-card-body li::before { background: var(--forest-dk); }
+    .after-card  .section-card-body li::before { background: var(--forest-lt); }
+    .prayer-box {
+      background: rgba(54,82,51,.06);
+      border: 1px solid rgba(54,82,51,.15);
+      border-radius: .6rem;
+      padding: .9rem 1.1rem;
+      margin-top: .9rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--forest-dk);
+      line-height: 1.6;
+    }
+    .practice-highlight {
+      background: rgba(200,169,110,.12);
+      border: 1px solid rgba(200,169,110,.3);
+      border-radius: .6rem;
+      padding: .9rem 1.1rem;
+      margin-top: .9rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: #7a5a2a;
+      line-height: 1.6;
+    }
 
-        .tab-content.active {
-            display: block;
-        }
+    /* ─── REFLECTION EMAIL ─── */
+    .reflection-section {
+      background: #fff;
+      border-radius: 1.2rem;
+      border: 1px solid rgba(54,82,51,.12);
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(54,82,51,.07);
+    }
+    .reflection-head {
+      background: linear-gradient(90deg, var(--forest) 0%, var(--forest-lt) 100%);
+      padding: 1.2rem 1.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .reflection-head h3 {
+      font-family: 'Jost', sans-serif;
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #fff;
+    }
+    .reflection-head p {
+      font-size: .78rem;
+      color: var(--sage-lt);
+    }
+    .reflection-toggle {
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.3);
+      color: #fff;
+      border-radius: .5rem;
+      padding: .4rem 1rem;
+      font-family: 'Jost', sans-serif;
+      font-size: .73rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .2s;
+      white-space: nowrap;
+    }
+    .reflection-toggle:hover { background: rgba(255,255,255,.28); }
+    .reflection-body {
+      padding: 1.8rem;
+      display: none;
+    }
+    .reflection-body.open { display: block; animation: fadeUp .3s ease both; }
+    .reflection-tabs {
+      display: flex;
+      gap: .5rem;
+      margin-bottom: 1.5rem;
+    }
+    .rtab {
+      flex: 1;
+      padding: .55rem;
+      border-radius: .5rem;
+      border: 1.5px solid rgba(54,82,51,.2);
+      background: none;
+      font-family: 'Jost', sans-serif;
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .08em;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-align: center;
+      transition: all .2s;
+    }
+    .rtab.active {
+      background: var(--forest);
+      border-color: var(--forest);
+      color: #fff;
+    }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label {
+      display: block;
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: .45rem;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: .75rem 1rem;
+      border: 1.5px solid rgba(54,82,51,.18);
+      border-radius: .6rem;
+      font-family: 'Jost', sans-serif;
+      font-size: .9rem;
+      color: var(--text);
+      background: var(--cream);
+      transition: border-color .2s, box-shadow .2s;
+      resize: vertical;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--forest);
+      box-shadow: 0 0 0 3px rgba(54,82,51,.12);
+    }
+    .form-group textarea { min-height: 120px; }
+    .reflection-prompts {
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+      margin-bottom: 1.2rem;
+    }
+    .prompt-pill {
+      display: flex;
+      align-items: flex-start;
+      gap: .7rem;
+      padding: .8rem 1rem;
+      background: rgba(54,82,51,.04);
+      border: 1px solid rgba(54,82,51,.1);
+      border-radius: .7rem;
+      font-size: .85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .prompt-pill::before {
+      content: '✦';
+      color: var(--forest);
+      font-size: .65rem;
+      margin-top: .15rem;
+      flex-shrink: 0;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 500px) { .form-row { grid-template-columns: 1fr; } }
+    .send-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: var(--forest);
+      color: #fff;
+      border: none;
+      border-radius: .65rem;
+      padding: .85rem 1.8rem;
+      font-family: 'Jost', sans-serif;
+      font-size: .82rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .2s, transform .2s;
+    }
+    .send-btn:hover { background: var(--forest-lt); transform: translateY(-2px); }
+    .send-success {
+      display: none;
+      align-items: center;
+      gap: .7rem;
+      background: rgba(54,82,51,.08);
+      border: 1px solid rgba(54,82,51,.2);
+      border-radius: .65rem;
+      padding: .85rem 1.4rem;
+      font-size: .88rem;
+      color: var(--forest-dk);
+      margin-top: .8rem;
+    }
+    .send-success.show { display: flex; animation: fadeUp .3s ease both; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      background: var(--forest-dk);
+      color: var(--sage-lt);
+      font-size: .75rem;
+      letter-spacing: .08em;
+    }
+    footer strong { color: var(--gold-lt); font-weight: 400; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 600px) {
+      .header-inner { padding: 2.2rem 1.2rem 2rem; }
+      .intro-panel, .day-panel { padding: 1.8rem 1rem 4rem; }
+      .reflection-head { padding: 1rem 1.2rem; }
+      .reflection-body { padding: 1.2rem; }
+    }
+  </style>
 </head>
-<body class="p-4 md:p-8">
+<body>
 
-    <div class="max-w-4xl mx-auto">
-        <!-- Header -->
-        <header class="text-center mb-10">
-            <h2 class="text-lg uppercase tracking-widest theme-text font-semibold mb-1">Resting in God</h2>
-            <h1 class="text-4xl md:text-5xl font-bold theme-text mb-4">Season 7</h1>
-            <p class="text-xl italic text-gray-600">Trusting God Deeply: Growing in Surrender, Dependence, and Confidence</p>
-        </header>
+<!-- ══════════════════════ HEADER ══════════════════════ -->
+<header>
+  <div class="header-bg"></div>
+  <div class="header-leaves"></div>
+  <div class="header-inner">
+    <div class="series-badge">
+      <span>A 10-Season Journey</span> &nbsp;·&nbsp; <span>Season 7 of 10</span>
+    </div>
+    <h1>Resting in <em>God</em></h1>
+    <p class="header-sub">Trusting God Deeply &nbsp;·&nbsp; Surrender · Dependence · Confidence</p>
+    <div class="season-dots">
+      <span class="done"></span>
+      <span class="done"></span>
+      <span class="done"></span>
+      <span class="done"></span>
+      <span class="done"></span>
+      <span class="done"></span>
+      <span class="active"></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</header>
 
-        <!-- Navigation Tabs -->
-        <nav class="flex flex-wrap justify-center border-b border-gray-200 mb-8 gap-2 md:gap-4">
-            <button onclick="showTab('intro')" id="tab-intro" class="px-4 py-2 text-sm md:text-base tab-btn tab-active">Introduction</button>
-            <button onclick="showTab('day31')" id="tab-day31" class="px-4 py-2 text-sm md:text-base tab-btn">Day 31</button>
-            <button onclick="showTab('day32')" id="tab-day32" class="px-4 py-2 text-sm md:text-base tab-btn">Day 32</button>
-            <button onclick="showTab('day33')" id="tab-day33" class="px-4 py-2 text-sm md:text-base tab-btn">Day 33</button>
-            <button onclick="showTab('day34')" id="tab-day34" class="px-4 py-2 text-sm md:text-base tab-btn">Day 34</button>
-            <button onclick="showTab('day35')" id="tab-day35" class="px-4 py-2 text-sm md:text-base tab-btn">Day 35</button>
-        </nav>
+<!-- ══════════════════════ TABS ══════════════════════ -->
+<div class="tabs-wrapper">
+  <div class="tabs-scroll" role="tablist">
+    <button class="tab-btn active" role="tab" onclick="switchTab('intro', this)">Introduction</button>
+    <button class="tab-btn" role="tab" onclick="switchTab('day31', this)">Day 31</button>
+    <button class="tab-btn" role="tab" onclick="switchTab('day32', this)">Day 32</button>
+    <button class="tab-btn" role="tab" onclick="switchTab('day33', this)">Day 33</button>
+    <button class="tab-btn" role="tab" onclick="switchTab('day34', this)">Day 34</button>
+    <button class="tab-btn" role="tab" onclick="switchTab('day35', this)">Day 35</button>
+  </div>
+</div>
 
-        <!-- Tab Contents -->
-        <main>
-            <!-- INTRO TAB -->
-            <div id="intro" class="tab-content active">
-                <div class="card p-6 md:p-10 border-t-8 theme-border">
-                    <h2 class="text-2xl font-bold mb-6 theme-text">How to Use These Guidelines</h2>
-                    <div class="space-y-4 text-gray-700 leading-relaxed">
-                        <p>Sabbath teaches us that we are not ultimately sustained by our own strength, control, or constant effort. It invites us to trust that God is present, faithful, and at work even when we stop striving.</p>
-                        <p>Yet trusting God deeply is not always easy. We may carry fears about the future, unresolved burdens, disappointments, or pressure to hold everything together ourselves.</p>
-                        <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-700 my-6">
-                            <p class="font-semibold mb-2">This season is an invitation to practice surrender:</p>
-                            <ul class="list-disc ml-6 space-y-1">
-                                <li>Release control gently</li>
-                                <li>Bring your fears honestly before God</li>
-                                <li>Rest in His faithfulness</li>
-                                <li>Learn to depend on His care</li>
-                            </ul>
-                        </div>
-                        <p class="italic text-center text-lg mt-6">"Trust in the Lord with all your heart, and do not lean on your own understanding." <br>— Proverbs 3:5</p>
-                    </div>
-                </div>
-            </div>
+<!-- ══════════════════════ INTRO ══════════════════════ -->
+<div id="panel-intro" class="tab-panel active">
+  <div class="intro-panel">
 
-            <!-- DAY 31 -->
-            <div id="day31" class="tab-content">
-                <div class="card p-6 md:p-10">
-                    <h3 class="section-header">Before</h3>
-                    <ul class="list-disc ml-6 mb-6 space-y-2">
-                        <li>Notice areas of life where you feel the need to control outcomes.</li>
-                        <li><strong>Pray:</strong> "Lord, help me loosen my grip and trust You."</li>
-                        <li>Acknowledge your limitations honestly.</li>
-                    </ul>
-
-                    <h3 class="section-header">During</h3>
-                    <ul class="list-disc ml-6 mb-6 space-y-2">
-                        <li>Read <strong>Proverbs 3:5-6</strong> slowly.</li>
-                        <li>Whenever anxious thoughts arise, pause and surrender them to God.</li>
-                        <li>Resist the urge to manage or solve everything today.</li>
-                        <li>Spend time resting in silence or prayer.</li>
-                        <li>Practice saying: <em>"God is with me, even when I do not control everything."</em></li>
-                    </ul>
-
-                    <h3 class="section-header">After</h3>
-                    <ul class="list-disc ml-6 mb-6 space-y-2">
-                        <li><strong>Reflect:</strong> What situations are hardest for me to surrender? How did letting go affect my peace today?</li>
-                        <li>Entrust your concerns to God again before ending your Sabbath.</li>
-                        <li>Rest in His care.</li>
-                    </ul>
-
-                    <div class="mt-10 pt-6 border-t">
-                        <label class="block font-bold theme-text mb-2">My Reflections for Day 31:</label>
-                        <textarea id="ref-day31" class="reflection-box" placeholder="Write your thoughts here..."></textarea>
-                        <button onclick="sendEmail(31)" class="btn-send mt-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-                            Email My Reflections
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- DAY 32 -->
-            <div id="day32" class="tab-content">
-                <div class="card p-6 md:p-10">
-                    <h3 class="section-header">Before</h3>
-                    <ul class="list-disc ml-6 mb-6 space-y-2">
-                        <li>Begin your Sabbath acknowledging your need for God.</li>
-                        <li><strong>Pray:</strong> "Lord, I cannot sustain myself apart from You."</li>
-                        <li>Release the pressure to appear strong or self-sufficient.</li>
-                    </ul>
-
-                    <h3 class="section-header">During</h3>
-                    <ul class="list-disc ml-6 mb-6 space-y-2">
-                        <li>Read <strong>John 15:4-5</strong> slowly.</li>
-                        <li>Spend several moments asking: <em>"What would it mean to depend on God right now?"</em></li>
-                        <li>Allow yourself to rest physically and emotionally.</li>
-                        <li>Receive help, kindness, or encouragement freely if it comes.</li>
-                        <li>Practice gratitude for God's sustaining presence.</li>
-                    </ul>
-
-                    <h3 class="section-header">After</h3>
-                    <ul class="list-disc ml-6 mb-6 space-y-2">
-                        <li><strong>Reflect:</strong> Where do I struggle to depend on God? What reminded me of God's care today?</li>
-                        <li>Thank God for carrying you through each day.</li>
-                        <li>End your Sabbath with quiet trust.</li>
-                    </ul>
-
-                    <div class="mt-10 pt-6 border-t">
-                        <label class="block font-bold theme-text mb-2">My Reflections for Day 32:</label>
-                        <textarea id="ref-day32" class="reflection-box" placeholder="Write your thoughts here..."></textarea>
-                        <button onclick="sendEmail(32)" class="btn-send mt-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-                            Email My Reflections
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- DAY 33 -->
-            <div id="day33" class="tab-content">
-                <div class="card p-6 md:p-10">
-                    <h3 class="section-header">Before</h3>
-                    <ul class="list-disc ml-6 mb-6 space-y-2">
-                        <li>Bring your uncertainties and unanswered questions before God.</li>
-                        <li><strong>Pray:</strong> "Lord, help me trust You with what I cannot yet see."</li>
-                        <li>Write down any fears about the future.</li>
-                    </ul>
-
-                    <h3 class="section-header">During</h3>
-                    <ul class="list-disc ml-6 mb-6 space-y-2">
-                        <li>Read <strong>Jeremiah 29:11-13</strong> slowly.</li>
-                        <li>Resist dwelling on worst-case scenarios.</li>
-                        <li>Whenever fear arises, breathe deeply and return your attention to God's presence.</li>
-                        <li>Spend time doing something peaceful and grounding.</li>
-                        <li>Remember that God's faithfulness extends beyond your understanding.</li>
-                    </ul>
-
-                    <h3 class="section-header">After</h3>
-                    <ul class="list-disc ml-6 mb-6 space-y-2">
-                        <li><strong>Reflect:</strong> What fears surfaced during my Sabbath? What helped me experience trust today?</li>
-                        <li>Offer your future to God once again.</li>
-                        <li>Rest in the assurance of His presence.</li>
-                    </ul>
-
-                    <div class="mt-10 pt-6 border-t">
-                        <label class="block font-bold theme-text mb-2">My Reflections for Day 33:</label>
-                        <textarea id="ref-day33" class="reflection-box" placeholder="Write your thoughts here..."></textarea>
-                        <button onclick="sendEmail(33)" class="btn-send mt-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-                            Email My Reflections
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- DAY 34 -->
-            <div id="day34" class="tab-content">
-                <div class="card p-6 md:p-10">
-                    <h3 class="section-header">Before</h3>
-                    <ul class="list-disc ml-6 mb-6 space-y-2">
-                        <li>Reflect on times God has sustained you in the past.</li>
-                        <li><strong>Pray:</strong> "Lord, help me remember Your faithfulness."</li>
-                        <li>Enter your Sabbath with gratitude rather than fear.</li>
-                    </ul>
-
-                    <h3 class="section-header">During</h3>
-                    <ul class="list-disc ml-6 mb-6 space-y-2">
-                        <li>Read <strong>Lamentations 3:21-26</strong> slowly.</li>
-                        <li>Spend time recalling moments of God's provision, guidance, or comfort.</li>
-                        <li>Write down several ways God has cared for you through the years.</li>
-                        <li>Allow remembrance to strengthen your trust.</li>
-                    </ul>
-
-                    <h3 class="section-header">After</h3>
-                    <ul class="list-disc ml-6 mb-6 space-y-2">
-                        <li><strong>Reflect:</strong> What memories reminded me of God's faithfulness? How does remembering strengthen my trust?</li>
-                        <li>Thank God specifically for His care throughout your life.</li>
-                        <li>Close your Sabbath with worship or quiet gratitude.</li>
-                    </ul>
-
-                    <div class="mt-10 pt-6 border-t">
-                        <label class="block font-bold theme-text mb-2">My Reflections for Day 34:</label>
-                        <textarea id="ref-day34" class="reflection-box" placeholder="Write your thoughts here..."></textarea>
-                        <button onclick="sendEmail(34)" class="btn-send mt-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-                            Email My Reflections
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- DAY 35 -->
-            <div id="day35" class="tab-content">
-                <div class="card p-6 md:p-10">
-                    <h3 class="section-header">Before</h3>
-                    <ul class="list-disc ml-6 mb-6 space-y-2">
-                        <li>Identify the emotional or spiritual burdens weighing most heavily on you.</li>
-                        <li><strong>Pray:</strong> "Lord, I bring these burdens to You."</li>
-                        <li>Release the pressure to carry everything alone.</li>
-                    </ul>
-
-                    <h3 class="section-header">During</h3>
-                    <ul class="list-disc ml-6 mb-6 space-y-2">
-                        <li>Read <strong>Psalm 55:22</strong> slowly.</li>
-                        <li>Spend time in quiet prayer, surrendering your concerns one by one.</li>
-                        <li>Imagine placing your burdens into God's hands.</li>
-                        <li>Rest physically if your body feels tired.</li>
-                        <li>Allow yourself to receive God's peace without striving.</li>
-                    </ul>
-
-                    <h3 class="section-header">After</h3>
-                    <ul class="list-disc ml-6 mb-6 space-y-2">
-                        <li><strong>Reflect:</strong> What burdens felt difficult to surrender? Did I experience moments of peace today?</li>
-                        <li>Thank God for His sustaining strength.</li>
-                        <li>End your Sabbath with a prayer of trust and release.</li>
-                    </ul>
-
-                    <div class="mt-10 pt-6 border-t">
-                        <label class="block font-bold theme-text mb-2">My Reflections for Day 35:</label>
-                        <textarea id="ref-day35" class="reflection-box" placeholder="Write your thoughts here..."></textarea>
-                        <button onclick="sendEmail(35)" class="btn-send mt-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-                            Email My Reflections
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </main>
-
-        <footer class="mt-12 text-center text-gray-500 text-sm">
-            <p>&copy; 2024 Resting in God Series • Season 7: Trusting God Deeply</p>
-        </footer>
+    <div class="intro-verse">
+      <p>"Trust in the Lord with all your heart, and do not lean on your own understanding."</p>
+      <cite>— Proverbs 3:5</cite>
     </div>
 
-    <script>
-        function showTab(tabId) {
-            // Hide all contents
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => content.classList.remove('active'));
+    <div class="intro-body">
+      <h2>Welcome to Season 7</h2>
+      <p>
+        Sabbath teaches us that we are not ultimately sustained by our own strength, control, or constant effort.
+        It invites us to trust that God is present, faithful, and at work — even when we stop striving.
+      </p>
+      <p>
+        Yet trusting God deeply is not always easy. We may carry fears about the future, unresolved burdens,
+        disappointments, or pressure to hold everything together ourselves.
+      </p>
+      <p><strong>This season is an invitation to practice surrender.</strong></p>
 
-            // Deactivate all buttons
-            const buttons = document.querySelectorAll('.tab-btn');
-            buttons.forEach(btn => btn.classList.remove('tab-active'));
+      <div class="intro-practices">
+        <p>
+          <strong>Release</strong> control gently.<br/>
+          <strong>Bring</strong> your fears honestly before God.<br/>
+          <strong>Rest</strong> in His faithfulness.<br/>
+          <strong>Learn</strong> to depend on His care.
+        </p>
+      </div>
 
-            // Show selected content and activate button
-            document.getElementById(tabId).classList.add('active');
-            document.getElementById('tab-' + tabId).classList.add('tab-active');
-            
-            // Scroll to top of content
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+      <p>Trust grows slowly through repeated moments of surrender. Each Sabbath Day in this season contains three sections to guide your practice:</p>
+    </div>
 
-        function sendEmail(dayNumber) {
-            const reflection = document.getElementById('ref-day' + dayNumber).value;
-            const subject = encodeURIComponent(`Resting in God: Season 7 - Day ${dayNumber} Reflections`);
-            const body = encodeURIComponent(`My reflections for Day ${dayNumber}:\n\n${reflection}\n\n---\nSeries: Resting in God (Season 7)`);
-            
-            // Construct mailto link
-            const mailtoLink = `mailto:?subject=${subject}&body=${body}`;
-            
-            // Open user's email client
-            window.location.href = mailtoLink;
-        }
-    </script>
+    <div class="intro-grid">
+      <div class="intro-card">
+        <div class="card-icon">🌿</div>
+        <h3>Before</h3>
+        <p>Prepare your heart by becoming aware of the burdens or fears you may be carrying into the Sabbath.</p>
+      </div>
+      <div class="intro-card">
+        <div class="card-icon">☀️</div>
+        <h3>During</h3>
+        <p>Practice rhythms of surrender, dependence, peace, and trust in God's care throughout your day.</p>
+      </div>
+      <div class="intro-card">
+        <div class="card-icon">🌙</div>
+        <h3>After</h3>
+        <p>Reflect on how God met you through rest and trust, and record your personal reflections.</p>
+      </div>
+      <div class="intro-card">
+        <div class="card-icon">✉️</div>
+        <h3>Reflect & Share</h3>
+        <p>Each day includes an option to email your personal reflections to yourself or someone you trust.</p>
+      </div>
+    </div>
+
+    <div class="intro-body">
+      <p>
+        This is Day 31 through Day 35 — the seven Sabbath Days of Season 7. Move through each one at your own pace,
+        trusting that God is present in every moment of your rest.
+      </p>
+    </div>
+
+    <button class="start-btn" onclick="switchTab('day31', document.querySelectorAll('.tab-btn')[1])">
+      Begin with Day 31 →
+    </button>
+  </div>
+</div>
+
+<!-- ══════════════════════ DAY 31 ══════════════════════ -->
+<div id="panel-day31" class="tab-panel">
+  <div class="day-panel">
+    <div class="day-header">
+      <div class="day-number-badge">Day 31 · Season 7</div>
+    </div>
+
+    <div class="day-scripture">
+      <div class="ref">Proverbs 3:5–6</div>
+      <p>"Trust in the Lord with all your heart, and do not lean on your own understanding. In all your ways acknowledge him, and he will make straight your paths."</p>
+    </div>
+
+    <div class="sections-grid">
+      <div class="section-card before-card">
+        <div class="section-card-head"><span class="icon">🌿</span><h3>Before</h3></div>
+        <div class="section-card-body">
+          <ul>
+            <li>Notice areas of life where you feel the need to control outcomes.</li>
+            <li>Acknowledge your limitations honestly.</li>
+          </ul>
+          <div class="prayer-box">"Lord, help me loosen my grip and trust You."</div>
+        </div>
+      </div>
+      <div class="section-card during-card">
+        <div class="section-card-head"><span class="icon">☀️</span><h3>During</h3></div>
+        <div class="section-card-body">
+          <ul>
+            <li>Read Proverbs 3:5–6 slowly.</li>
+            <li>Whenever anxious thoughts arise, pause and surrender them to God.</li>
+            <li>Resist the urge to manage or solve everything today.</li>
+            <li>Spend time resting in silence or prayer.</li>
+          </ul>
+          <div class="practice-highlight">"God is with me, even when I do not control everything."</div>
+        </div>
+      </div>
+      <div class="section-card after-card">
+        <div class="section-card-head"><span class="icon">🌙</span><h3>After</h3></div>
+        <div class="section-card-body">
+          <ul>
+            <li>Entrust your concerns to God again before ending your Sabbath.</li>
+            <li>Rest in His care.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reflection -->
+    <div class="reflection-section">
+      <div class="reflection-head">
+        <div>
+          <h3>Personal Reflections</h3>
+          <p>Record and send your reflections from today</p>
+        </div>
+        <button class="reflection-toggle" onclick="toggleReflection('r31')">Write Reflection ↓</button>
+      </div>
+      <div class="reflection-body" id="r31">
+        <div class="reflection-prompts">
+          <div class="prompt-pill">What situations are hardest for me to surrender?</div>
+          <div class="prompt-pill">How did letting go affect my peace today?</div>
+        </div>
+        <div class="reflection-tabs">
+          <button class="rtab active" onclick="switchRtab(this, 'r31-self')">Send to Myself</button>
+          <button class="rtab" onclick="switchRtab(this, 'r31-other')">Send to Someone Else</button>
+        </div>
+        <div id="r31-self">
+          <div class="form-group">
+            <label>Your Email</label>
+            <input type="email" placeholder="yourname@email.com" />
+          </div>
+        </div>
+        <div id="r31-other" style="display:none">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Recipient Name</label>
+              <input type="text" placeholder="Friend's name" />
+            </div>
+            <div class="form-group">
+              <label>Recipient Email</label>
+              <input type="email" placeholder="friend@email.com" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Your Reflection</label>
+          <textarea placeholder="Write your thoughts, prayers, and reflections from today's Sabbath…"></textarea>
+        </div>
+        <button class="send-btn" onclick="sendReflection('r31-success')">✉ Send Reflection</button>
+        <div class="send-success" id="r31-success">
+          <span>🌿</span> Your reflection has been sent. May it continue to bless you.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ DAY 32 ══════════════════════ -->
+<div id="panel-day32" class="tab-panel">
+  <div class="day-panel">
+    <div class="day-header">
+      <div class="day-number-badge">Day 32 · Season 7</div>
+    </div>
+
+    <div class="day-scripture">
+      <div class="ref">John 15:4–5</div>
+      <p>"Abide in me, and I in you. As the branch cannot bear fruit by itself, unless it abides in the vine, neither can you, unless you abide in me. I am the vine; you are the branches."</p>
+    </div>
+
+    <div class="sections-grid">
+      <div class="section-card before-card">
+        <div class="section-card-head"><span class="icon">🌿</span><h3>Before</h3></div>
+        <div class="section-card-body">
+          <ul>
+            <li>Begin your Sabbath acknowledging your need for God.</li>
+            <li>Release the pressure to appear strong or self-sufficient.</li>
+          </ul>
+          <div class="prayer-box">"Lord, I cannot sustain myself apart from You."</div>
+        </div>
+      </div>
+      <div class="section-card during-card">
+        <div class="section-card-head"><span class="icon">☀️</span><h3>During</h3></div>
+        <div class="section-card-body">
+          <ul>
+            <li>Read John 15:4–5 slowly.</li>
+            <li>Throughout the day, ask: "What would it mean to depend on God right now?"</li>
+            <li>Allow yourself to rest physically and emotionally.</li>
+            <li>Receive help, kindness, or encouragement freely if it comes.</li>
+            <li>Practice gratitude for God's sustaining presence.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="section-card after-card">
+        <div class="section-card-head"><span class="icon">🌙</span><h3>After</h3></div>
+        <div class="section-card-body">
+          <ul>
+            <li>Thank God for carrying you through each day.</li>
+            <li>End your Sabbath with quiet trust.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="reflection-section">
+      <div class="reflection-head">
+        <div>
+          <h3>Personal Reflections</h3>
+          <p>Record and send your reflections from today</p>
+        </div>
+        <button class="reflection-toggle" onclick="toggleReflection('r32')">Write Reflection ↓</button>
+      </div>
+      <div class="reflection-body" id="r32">
+        <div class="reflection-prompts">
+          <div class="prompt-pill">Where do I struggle to depend on God?</div>
+          <div class="prompt-pill">What reminded me of God's care today?</div>
+        </div>
+        <div class="reflection-tabs">
+          <button class="rtab active" onclick="switchRtab(this, 'r32-self')">Send to Myself</button>
+          <button class="rtab" onclick="switchRtab(this, 'r32-other')">Send to Someone Else</button>
+        </div>
+        <div id="r32-self">
+          <div class="form-group"><label>Your Email</label><input type="email" placeholder="yourname@email.com" /></div>
+        </div>
+        <div id="r32-other" style="display:none">
+          <div class="form-row">
+            <div class="form-group"><label>Recipient Name</label><input type="text" placeholder="Friend's name" /></div>
+            <div class="form-group"><label>Recipient Email</label><input type="email" placeholder="friend@email.com" /></div>
+          </div>
+        </div>
+        <div class="form-group"><label>Your Reflection</label><textarea placeholder="Write your thoughts, prayers, and reflections from today's Sabbath…"></textarea></div>
+        <button class="send-btn" onclick="sendReflection('r32-success')">✉ Send Reflection</button>
+        <div class="send-success" id="r32-success"><span>🌿</span> Your reflection has been sent. May it continue to bless you.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ DAY 33 ══════════════════════ -->
+<div id="panel-day33" class="tab-panel">
+  <div class="day-panel">
+    <div class="day-header">
+      <div class="day-number-badge">Day 33 · Season 7</div>
+    </div>
+
+    <div class="day-scripture">
+      <div class="ref">Jeremiah 29:11–13</div>
+      <p>"For I know the plans I have for you, declares the Lord, plans for welfare and not for evil, to give you a future and a hope. Then you will call upon me and come and pray to me, and I will hear you."</p>
+    </div>
+
+    <div class="sections-grid">
+      <div class="section-card before-card">
+        <div class="section-card-head"><span class="icon">🌿</span><h3>Before</h3></div>
+        <div class="section-card-body">
+          <ul>
+            <li>Bring your uncertainties and unanswered questions before God.</li>
+            <li>Write down any fears about the future.</li>
+          </ul>
+          <div class="prayer-box">"Lord, help me trust You with what I cannot yet see."</div>
+        </div>
+      </div>
+      <div class="section-card during-card">
+        <div class="section-card-head"><span class="icon">☀️</span><h3>During</h3></div>
+        <div class="section-card-body">
+          <ul>
+            <li>Read Jeremiah 29:11–13 slowly.</li>
+            <li>Resist dwelling on worst-case scenarios.</li>
+            <li>Whenever fear arises, breathe deeply and return your attention to God's presence.</li>
+            <li>Spend time doing something peaceful and grounding.</li>
+            <li>Remember that God's faithfulness extends beyond your understanding.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="section-card after-card">
+        <div class="section-card-head"><span class="icon">🌙</span><h3>After</h3></div>
+        <div class="section-card-body">
+          <ul>
+            <li>Offer your future to God once again.</li>
+            <li>Rest in the assurance of His presence.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="reflection-section">
+      <div class="reflection-head">
+        <div>
+          <h3>Personal Reflections</h3>
+          <p>Record and send your reflections from today</p>
+        </div>
+        <button class="reflection-toggle" onclick="toggleReflection('r33')">Write Reflection ↓</button>
+      </div>
+      <div class="reflection-body" id="r33">
+        <div class="reflection-prompts">
+          <div class="prompt-pill">What fears surfaced during my Sabbath?</div>
+          <div class="prompt-pill">What helped me experience trust today?</div>
+        </div>
+        <div class="reflection-tabs">
+          <button class="rtab active" onclick="switchRtab(this, 'r33-self')">Send to Myself</button>
+          <button class="rtab" onclick="switchRtab(this, 'r33-other')">Send to Someone Else</button>
+        </div>
+        <div id="r33-self">
+          <div class="form-group"><label>Your Email</label><input type="email" placeholder="yourname@email.com" /></div>
+        </div>
+        <div id="r33-other" style="display:none">
+          <div class="form-row">
+            <div class="form-group"><label>Recipient Name</label><input type="text" placeholder="Friend's name" /></div>
+            <div class="form-group"><label>Recipient Email</label><input type="email" placeholder="friend@email.com" /></div>
+          </div>
+        </div>
+        <div class="form-group"><label>Your Reflection</label><textarea placeholder="Write your thoughts, prayers, and reflections from today's Sabbath…"></textarea></div>
+        <button class="send-btn" onclick="sendReflection('r33-success')">✉ Send Reflection</button>
+        <div class="send-success" id="r33-success"><span>🌿</span> Your reflection has been sent. May it continue to bless you.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ DAY 34 ══════════════════════ -->
+<div id="panel-day34" class="tab-panel">
+  <div class="day-panel">
+    <div class="day-header">
+      <div class="day-number-badge">Day 34 · Season 7</div>
+    </div>
+
+    <div class="day-scripture">
+      <div class="ref">Lamentations 3:21–26</div>
+      <p>"But this I call to mind, and therefore I have hope: The steadfast love of the Lord never ceases; his mercies never come to an end; they are new every morning; great is your faithfulness."</p>
+    </div>
+
+    <div class="sections-grid">
+      <div class="section-card before-card">
+        <div class="section-card-head"><span class="icon">🌿</span><h3>Before</h3></div>
+        <div class="section-card-body">
+          <ul>
+            <li>Reflect on times God has sustained you in the past.</li>
+            <li>Enter your Sabbath with gratitude rather than fear.</li>
+          </ul>
+          <div class="prayer-box">"Lord, help me remember Your faithfulness."</div>
+        </div>
+      </div>
+      <div class="section-card during-card">
+        <div class="section-card-head"><span class="icon">☀️</span><h3>During</h3></div>
+        <div class="section-card-body">
+          <ul>
+            <li>Read Lamentations 3:21–26 slowly.</li>
+            <li>Spend time recalling moments of God's provision, guidance, or comfort.</li>
+            <li>Write down several ways God has cared for you through the years.</li>
+            <li>Allow remembrance to strengthen your trust.</li>
+            <li>Rest peacefully in the knowledge that God remains faithful.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="section-card after-card">
+        <div class="section-card-head"><span class="icon">🌙</span><h3>After</h3></div>
+        <div class="section-card-body">
+          <ul>
+            <li>Thank God specifically for His care throughout your life.</li>
+            <li>Close your Sabbath with worship or quiet gratitude.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="reflection-section">
+      <div class="reflection-head">
+        <div>
+          <h3>Personal Reflections</h3>
+          <p>Record and send your reflections from today</p>
+        </div>
+        <button class="reflection-toggle" onclick="toggleReflection('r34')">Write Reflection ↓</button>
+      </div>
+      <div class="reflection-body" id="r34">
+        <div class="reflection-prompts">
+          <div class="prompt-pill">What memories reminded me of God's faithfulness?</div>
+          <div class="prompt-pill">How does remembering strengthen my trust?</div>
+        </div>
+        <div class="reflection-tabs">
+          <button class="rtab active" onclick="switchRtab(this, 'r34-self')">Send to Myself</button>
+          <button class="rtab" onclick="switchRtab(this, 'r34-other')">Send to Someone Else</button>
+        </div>
+        <div id="r34-self">
+          <div class="form-group"><label>Your Email</label><input type="email" placeholder="yourname@email.com" /></div>
+        </div>
+        <div id="r34-other" style="display:none">
+          <div class="form-row">
+            <div class="form-group"><label>Recipient Name</label><input type="text" placeholder="Friend's name" /></div>
+            <div class="form-group"><label>Recipient Email</label><input type="email" placeholder="friend@email.com" /></div>
+          </div>
+        </div>
+        <div class="form-group"><label>Your Reflection</label><textarea placeholder="Write your thoughts, prayers, and reflections from today's Sabbath…"></textarea></div>
+        <button class="send-btn" onclick="sendReflection('r34-success')">✉ Send Reflection</button>
+        <div class="send-success" id="r34-success"><span>🌿</span> Your reflection has been sent. May it continue to bless you.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ DAY 35 ══════════════════════ -->
+<div id="panel-day35" class="tab-panel">
+  <div class="day-panel">
+    <div class="day-header">
+      <div class="day-number-badge">Day 35 · Season 7</div>
+    </div>
+
+    <div class="day-scripture">
+      <div class="ref">Psalm 55:22</div>
+      <p>"Cast your burden on the Lord, and he will sustain you; he will never permit the righteous to be moved."</p>
+    </div>
+
+    <div class="sections-grid">
+      <div class="section-card before-card">
+        <div class="section-card-head"><span class="icon">🌿</span><h3>Before</h3></div>
+        <div class="section-card-body">
+          <ul>
+            <li>Identify the emotional or spiritual burdens weighing most heavily on you.</li>
+            <li>Release the pressure to carry everything alone.</li>
+          </ul>
+          <div class="prayer-box">"Lord, I bring these burdens to You."</div>
+        </div>
+      </div>
+      <div class="section-card during-card">
+        <div class="section-card-head"><span class="icon">☀️</span><h3>During</h3></div>
+        <div class="section-card-body">
+          <ul>
+            <li>Read Psalm 55:22 slowly.</li>
+            <li>Spend time in quiet prayer, surrendering your concerns one by one.</li>
+            <li>Imagine placing your burdens into God's hands.</li>
+            <li>Rest physically if your body feels tired.</li>
+            <li>Allow yourself to receive God's peace without striving.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="section-card after-card">
+        <div class="section-card-head"><span class="icon">🌙</span><h3>After</h3></div>
+        <div class="section-card-body">
+          <ul>
+            <li>Thank God for His sustaining strength.</li>
+            <li>End your Sabbath with a prayer of trust and release.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="reflection-section">
+      <div class="reflection-head">
+        <div>
+          <h3>Personal Reflections</h3>
+          <p>Record and send your reflections from today</p>
+        </div>
+        <button class="reflection-toggle" onclick="toggleReflection('r35')">Write Reflection ↓</button>
+      </div>
+      <div class="reflection-body" id="r35">
+        <div class="reflection-prompts">
+          <div class="prompt-pill">What burdens felt difficult to surrender?</div>
+          <div class="prompt-pill">Did I experience moments of peace today?</div>
+        </div>
+        <div class="reflection-tabs">
+          <button class="rtab active" onclick="switchRtab(this, 'r35-self')">Send to Myself</button>
+          <button class="rtab" onclick="switchRtab(this, 'r35-other')">Send to Someone Else</button>
+        </div>
+        <div id="r35-self">
+          <div class="form-group"><label>Your Email</label><input type="email" placeholder="yourname@email.com" /></div>
+        </div>
+        <div id="r35-other" style="display:none">
+          <div class="form-row">
+            <div class="form-group"><label>Recipient Name</label><input type="text" placeholder="Friend's name" /></div>
+            <div class="form-group"><label>Recipient Email</label><input type="email" placeholder="friend@email.com" /></div>
+          </div>
+        </div>
+        <div class="form-group"><label>Your Reflection</label><textarea placeholder="Write your thoughts, prayers, and reflections from today's Sabbath…"></textarea></div>
+        <button class="send-btn" onclick="sendReflection('r35-success')">✉ Send Reflection</button>
+        <div class="send-success" id="r35-success"><span>🌿</span> Your reflection has been sent. May it continue to bless you.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ FOOTER ══════════════════════ -->
+<footer>
+  <strong>Resting in God</strong> &nbsp;·&nbsp; A 10-Season Sabbath Journey &nbsp;·&nbsp; Season 7 of 10
+</footer>
+
+<script>
+  // ── Tab switching ──
+  function switchTab(id, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + id).classList.add('active');
+    btn.classList.add('active');
+    // scroll tab into view on mobile
+    btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── Reflection toggle ──
+  function toggleReflection(id) {
+    const body = document.getElementById(id);
+    const btn = body.previousElementSibling.querySelector('.reflection-toggle');
+    const isOpen = body.classList.toggle('open');
+    btn.textContent = isOpen ? 'Close ✕' : 'Write Reflection ↓';
+  }
+
+  // ── Self / Other tabs ──
+  function switchRtab(btn, targetId) {
+    const container = btn.closest('.reflection-body');
+    container.querySelectorAll('.rtab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    // find all sibling divs that are self/other
+    const allTargets = container.querySelectorAll('[id$="-self"], [id$="-other"]');
+    allTargets.forEach(t => t.style.display = 'none');
+    document.getElementById(targetId).style.display = 'block';
+  }
+
+  // ── Send reflection (opens mailto) ──
+  function sendReflection(successId) {
+    const body = document.getElementById(successId).closest('.reflection-body');
+    const emailInput = body.querySelector('input[type="email"]');
+    const textarea = body.querySelector('textarea');
+    const email = emailInput ? emailInput.value.trim() : '';
+    const reflection = textarea ? textarea.value.trim() : '';
+
+    if (!email) { emailInput && emailInput.focus(); return; }
+    if (!reflection) { textarea && textarea.focus(); return; }
+
+    const dayBadge = body.closest('.day-panel')?.querySelector('.day-number-badge')?.textContent || 'Sabbath Day';
+    const subject = encodeURIComponent('My Reflection — ' + dayBadge + ' | Resting in God');
+    const bodyText = encodeURIComponent(reflection + '\n\n— Resting in God, Season 7');
+    window.location.href = 'mailto:' + encodeURIComponent(email) + '?subject=' + subject + '&body=' + bodyText;
+
+    const success = document.getElementById(successId);
+    success.classList.add('show');
+    setTimeout(() => success.classList.remove('show'), 5000);
+  }
+</script>
 </body>
 </html>
