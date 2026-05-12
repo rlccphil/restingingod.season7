@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resting in God - Season 7</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-color: #365233;
+            --accent-color: #d4af37;
+            --bg-soft: #f8faf7;
+        }
+
+        body {
+            background-color: var(--bg-soft);
+            color: #2d3748;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .theme-bg { background-color: var(--primary-color); }
+        .theme-text { color: var(--primary-color); }
+        .theme-border { border-color: var(--primary-color); }
+        
+        .tab-active {
+            border-bottom: 4px solid var(--primary-color);
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s;
+        }
+
+        .section-header {
+            border-left: 4px solid var(--accent-color);
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--primary-color);
+        }
+
+        .reflection-box {
+            background-color: #fdfdfd;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            width: 100%;
+            min-height: 120px;
+            margin-top: 1rem;
+        }
+
+        .btn-send {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: opacity 0.2s;
+        }
+
+        .btn-send:hover { opacity: 0.9; }
+
+        /* Animation for tab content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <header class="text-center mb-10">
+            <h2 class="text-lg uppercase tracking-widest theme-text font-semibold mb-1">Resting in God</h2>
+            <h1 class="text-4xl md:text-5xl font-bold theme-text mb-4">Season 7</h1>
+            <p class="text-xl italic text-gray-600">Trusting God Deeply: Growing in Surrender, Dependence, and Confidence</p>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="flex flex-wrap justify-center border-b border-gray-200 mb-8 gap-2 md:gap-4">
+            <button onclick="showTab('intro')" id="tab-intro" class="px-4 py-2 text-sm md:text-base tab-btn tab-active">Introduction</button>
+            <button onclick="showTab('day31')" id="tab-day31" class="px-4 py-2 text-sm md:text-base tab-btn">Day 31</button>
+            <button onclick="showTab('day32')" id="tab-day32" class="px-4 py-2 text-sm md:text-base tab-btn">Day 32</button>
+            <button onclick="showTab('day33')" id="tab-day33" class="px-4 py-2 text-sm md:text-base tab-btn">Day 33</button>
+            <button onclick="showTab('day34')" id="tab-day34" class="px-4 py-2 text-sm md:text-base tab-btn">Day 34</button>
+            <button onclick="showTab('day35')" id="tab-day35" class="px-4 py-2 text-sm md:text-base tab-btn">Day 35</button>
+        </nav>
+
+        <!-- Tab Contents -->
+        <main>
+            <!-- INTRO TAB -->
+            <div id="intro" class="tab-content active">
+                <div class="card p-6 md:p-10 border-t-8 theme-border">
+                    <h2 class="text-2xl font-bold mb-6 theme-text">How to Use These Guidelines</h2>
+                    <div class="space-y-4 text-gray-700 leading-relaxed">
+                        <p>Sabbath teaches us that we are not ultimately sustained by our own strength, control, or constant effort. It invites us to trust that God is present, faithful, and at work even when we stop striving.</p>
+                        <p>Yet trusting God deeply is not always easy. We may carry fears about the future, unresolved burdens, disappointments, or pressure to hold everything together ourselves.</p>
+                        <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-700 my-6">
+                            <p class="font-semibold mb-2">This season is an invitation to practice surrender:</p>
+                            <ul class="list-disc ml-6 space-y-1">
+                                <li>Release control gently</li>
+                                <li>Bring your fears honestly before God</li>
+                                <li>Rest in His faithfulness</li>
+                                <li>Learn to depend on His care</li>
+                            </ul>
+                        </div>
+                        <p class="italic text-center text-lg mt-6">"Trust in the Lord with all your heart, and do not lean on your own understanding." <br>— Proverbs 3:5</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 31 -->
+            <div id="day31" class="tab-content">
+                <div class="card p-6 md:p-10">
+                    <h3 class="section-header">Before</h3>
+                    <ul class="list-disc ml-6 mb-6 space-y-2">
+                        <li>Notice areas of life where you feel the need to control outcomes.</li>
+                        <li><strong>Pray:</strong> "Lord, help me loosen my grip and trust You."</li>
+                        <li>Acknowledge your limitations honestly.</li>
+                    </ul>
+
+                    <h3 class="section-header">During</h3>
+                    <ul class="list-disc ml-6 mb-6 space-y-2">
+                        <li>Read <strong>Proverbs 3:5-6</strong> slowly.</li>
+                        <li>Whenever anxious thoughts arise, pause and surrender them to God.</li>
+                        <li>Resist the urge to manage or solve everything today.</li>
+                        <li>Spend time resting in silence or prayer.</li>
+                        <li>Practice saying: <em>"God is with me, even when I do not control everything."</em></li>
+                    </ul>
+
+                    <h3 class="section-header">After</h3>
+                    <ul class="list-disc ml-6 mb-6 space-y-2">
+                        <li><strong>Reflect:</strong> What situations are hardest for me to surrender? How did letting go affect my peace today?</li>
+                        <li>Entrust your concerns to God again before ending your Sabbath.</li>
+                        <li>Rest in His care.</li>
+                    </ul>
+
+                    <div class="mt-10 pt-6 border-t">
+                        <label class="block font-bold theme-text mb-2">My Reflections for Day 31:</label>
+                        <textarea id="ref-day31" class="reflection-box" placeholder="Write your thoughts here..."></textarea>
+                        <button onclick="sendEmail(31)" class="btn-send mt-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                            Email My Reflections
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 32 -->
+            <div id="day32" class="tab-content">
+                <div class="card p-6 md:p-10">
+                    <h3 class="section-header">Before</h3>
+                    <ul class="list-disc ml-6 mb-6 space-y-2">
+                        <li>Begin your Sabbath acknowledging your need for God.</li>
+                        <li><strong>Pray:</strong> "Lord, I cannot sustain myself apart from You."</li>
+                        <li>Release the pressure to appear strong or self-sufficient.</li>
+                    </ul>
+
+                    <h3 class="section-header">During</h3>
+                    <ul class="list-disc ml-6 mb-6 space-y-2">
+                        <li>Read <strong>John 15:4-5</strong> slowly.</li>
+                        <li>Spend several moments asking: <em>"What would it mean to depend on God right now?"</em></li>
+                        <li>Allow yourself to rest physically and emotionally.</li>
+                        <li>Receive help, kindness, or encouragement freely if it comes.</li>
+                        <li>Practice gratitude for God's sustaining presence.</li>
+                    </ul>
+
+                    <h3 class="section-header">After</h3>
+                    <ul class="list-disc ml-6 mb-6 space-y-2">
+                        <li><strong>Reflect:</strong> Where do I struggle to depend on God? What reminded me of God's care today?</li>
+                        <li>Thank God for carrying you through each day.</li>
+                        <li>End your Sabbath with quiet trust.</li>
+                    </ul>
+
+                    <div class="mt-10 pt-6 border-t">
+                        <label class="block font-bold theme-text mb-2">My Reflections for Day 32:</label>
+                        <textarea id="ref-day32" class="reflection-box" placeholder="Write your thoughts here..."></textarea>
+                        <button onclick="sendEmail(32)" class="btn-send mt-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                            Email My Reflections
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 33 -->
+            <div id="day33" class="tab-content">
+                <div class="card p-6 md:p-10">
+                    <h3 class="section-header">Before</h3>
+                    <ul class="list-disc ml-6 mb-6 space-y-2">
+                        <li>Bring your uncertainties and unanswered questions before God.</li>
+                        <li><strong>Pray:</strong> "Lord, help me trust You with what I cannot yet see."</li>
+                        <li>Write down any fears about the future.</li>
+                    </ul>
+
+                    <h3 class="section-header">During</h3>
+                    <ul class="list-disc ml-6 mb-6 space-y-2">
+                        <li>Read <strong>Jeremiah 29:11-13</strong> slowly.</li>
+                        <li>Resist dwelling on worst-case scenarios.</li>
+                        <li>Whenever fear arises, breathe deeply and return your attention to God's presence.</li>
+                        <li>Spend time doing something peaceful and grounding.</li>
+                        <li>Remember that God's faithfulness extends beyond your understanding.</li>
+                    </ul>
+
+                    <h3 class="section-header">After</h3>
+                    <ul class="list-disc ml-6 mb-6 space-y-2">
+                        <li><strong>Reflect:</strong> What fears surfaced during my Sabbath? What helped me experience trust today?</li>
+                        <li>Offer your future to God once again.</li>
+                        <li>Rest in the assurance of His presence.</li>
+                    </ul>
+
+                    <div class="mt-10 pt-6 border-t">
+                        <label class="block font-bold theme-text mb-2">My Reflections for Day 33:</label>
+                        <textarea id="ref-day33" class="reflection-box" placeholder="Write your thoughts here..."></textarea>
+                        <button onclick="sendEmail(33)" class="btn-send mt-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                            Email My Reflections
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 34 -->
+            <div id="day34" class="tab-content">
+                <div class="card p-6 md:p-10">
+                    <h3 class="section-header">Before</h3>
+                    <ul class="list-disc ml-6 mb-6 space-y-2">
+                        <li>Reflect on times God has sustained you in the past.</li>
+                        <li><strong>Pray:</strong> "Lord, help me remember Your faithfulness."</li>
+                        <li>Enter your Sabbath with gratitude rather than fear.</li>
+                    </ul>
+
+                    <h3 class="section-header">During</h3>
+                    <ul class="list-disc ml-6 mb-6 space-y-2">
+                        <li>Read <strong>Lamentations 3:21-26</strong> slowly.</li>
+                        <li>Spend time recalling moments of God's provision, guidance, or comfort.</li>
+                        <li>Write down several ways God has cared for you through the years.</li>
+                        <li>Allow remembrance to strengthen your trust.</li>
+                    </ul>
+
+                    <h3 class="section-header">After</h3>
+                    <ul class="list-disc ml-6 mb-6 space-y-2">
+                        <li><strong>Reflect:</strong> What memories reminded me of God's faithfulness? How does remembering strengthen my trust?</li>
+                        <li>Thank God specifically for His care throughout your life.</li>
+                        <li>Close your Sabbath with worship or quiet gratitude.</li>
+                    </ul>
+
+                    <div class="mt-10 pt-6 border-t">
+                        <label class="block font-bold theme-text mb-2">My Reflections for Day 34:</label>
+                        <textarea id="ref-day34" class="reflection-box" placeholder="Write your thoughts here..."></textarea>
+                        <button onclick="sendEmail(34)" class="btn-send mt-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                            Email My Reflections
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 35 -->
+            <div id="day35" class="tab-content">
+                <div class="card p-6 md:p-10">
+                    <h3 class="section-header">Before</h3>
+                    <ul class="list-disc ml-6 mb-6 space-y-2">
+                        <li>Identify the emotional or spiritual burdens weighing most heavily on you.</li>
+                        <li><strong>Pray:</strong> "Lord, I bring these burdens to You."</li>
+                        <li>Release the pressure to carry everything alone.</li>
+                    </ul>
+
+                    <h3 class="section-header">During</h3>
+                    <ul class="list-disc ml-6 mb-6 space-y-2">
+                        <li>Read <strong>Psalm 55:22</strong> slowly.</li>
+                        <li>Spend time in quiet prayer, surrendering your concerns one by one.</li>
+                        <li>Imagine placing your burdens into God's hands.</li>
+                        <li>Rest physically if your body feels tired.</li>
+                        <li>Allow yourself to receive God's peace without striving.</li>
+                    </ul>
+
+                    <h3 class="section-header">After</h3>
+                    <ul class="list-disc ml-6 mb-6 space-y-2">
+                        <li><strong>Reflect:</strong> What burdens felt difficult to surrender? Did I experience moments of peace today?</li>
+                        <li>Thank God for His sustaining strength.</li>
+                        <li>End your Sabbath with a prayer of trust and release.</li>
+                    </ul>
+
+                    <div class="mt-10 pt-6 border-t">
+                        <label class="block font-bold theme-text mb-2">My Reflections for Day 35:</label>
+                        <textarea id="ref-day35" class="reflection-box" placeholder="Write your thoughts here..."></textarea>
+                        <button onclick="sendEmail(35)" class="btn-send mt-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                            Email My Reflections
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="mt-12 text-center text-gray-500 text-sm">
+            <p>&copy; 2024 Resting in God Series • Season 7: Trusting God Deeply</p>
+        </footer>
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            // Hide all contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Deactivate all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('tab-active'));
+
+            // Show selected content and activate button
+            document.getElementById(tabId).classList.add('active');
+            document.getElementById('tab-' + tabId).classList.add('tab-active');
+            
+            // Scroll to top of content
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function sendEmail(dayNumber) {
+            const reflection = document.getElementById('ref-day' + dayNumber).value;
+            const subject = encodeURIComponent(`Resting in God: Season 7 - Day ${dayNumber} Reflections`);
+            const body = encodeURIComponent(`My reflections for Day ${dayNumber}:\n\n${reflection}\n\n---\nSeries: Resting in God (Season 7)`);
+            
+            // Construct mailto link
+            const mailtoLink = `mailto:?subject=${subject}&body=${body}`;
+            
+            // Open user's email client
+            window.location.href = mailtoLink;
+        }
+    </script>
+</body>
+</html>
